@@ -3,6 +3,8 @@ var res = {
     CloseNormal_png : "res/CloseNormal.png",
     CloseSelected_png : "res/CloseSelected.png",
 
+    FieldBg: "res/FieldBg.png",
+
     tile: {
         blue: "/res/BlueTile.png",
         purple: "/res/PurpleTile.png",
