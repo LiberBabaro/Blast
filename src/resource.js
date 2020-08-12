@@ -3,14 +3,14 @@ var res = {
     CloseNormal_png : "res/CloseNormal.png",
     CloseSelected_png : "res/CloseSelected.png",
 
-    FieldBg: "res/FieldBg.png",
+    FieldBg: "res/images/FieldBg.png",
 
     tile: {
-        blue: "/res/BlueTile.png",
-        purple: "/res/PurpleTile.png",
-        red: "/res/RedTile.png",
-        yellow: "/res/YellowTile.png",
-        green: "/res/GreenTile.png",
+        blue: "/res/images/tiles/BlueTile.png",
+        purple: "/res/images/tiles/PurpleTile.png",
+        red: "/res/images/tiles/RedTile.png",
+        yellow: "/res/images/tiles/YellowTile.png",
+        green: "/res/images/tiles/GreenTile.png",
     },
 
     font: {
