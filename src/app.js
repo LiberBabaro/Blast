@@ -12,6 +12,10 @@ var HelloWorldLayer = cc.Layer.extend({
         // ask the window size
         var size = cc.winSize;
 
+        var backgroundLayer = new cc.LayerColor.create();
+        backgroundLayer.setColor(cc.color(161, 161, 161));
+        this.addChild(backgroundLayer);
+        
         // add a "close" icon to exit the progress. it's an autorelease object
         var closeItem = new cc.MenuItemImage(
             res.CloseNormal_png,
@@ -45,7 +49,7 @@ var HelloWorldLayer = cc.Layer.extend({
         // add "HelloWorld" splash screen
         this.field = new Field();
         //this.field.setPosition(cc.p( ((size.width - 1641) / 2), (size.height - 1827) / 2) );
-        this.field.setPosition(cc.p( (132), (438)) );
+        this.field.setPosition(cc.p( (132), (219)) );
         this.addChild( this.field );
 
         //this.sprite = new cc.Sprite(res.tile.red);
