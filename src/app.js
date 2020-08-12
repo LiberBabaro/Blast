@@ -42,22 +42,27 @@ var HelloWorldLayer = cc.Layer.extend({
         // add the label as a child to this layer
         this.addChild(helloLabel, 5);
 
-        // add "HelloWorld" splash screen"
-        this.sprite = new cc.Sprite(res.HelloWorld_png);
-        this.sprite.attr({
-            x: size.width / 2,
-            y: size.height / 2,
-            scale: 0.5,
-            rotation: 180
-        });
-        this.addChild(this.sprite, 0);
+        // add "HelloWorld" splash screen
+        this.field = new Field();
+        //this.field.setPosition(cc.p( ((size.width - 1641) / 2), (size.height - 1827) / 2) );
+        this.field.setPosition(cc.p( (132), (438)) );
+        this.addChild( this.field );
 
-        this.sprite.runAction(
-            cc.sequence(
-                cc.rotateTo(2, 0),
-                cc.scaleTo(2, 1, 1)
-            )
-        );
+        //this.sprite = new cc.Sprite(res.tile.red);
+        //this.sprite.attr({
+        //    x: size.width / 2,
+        //    y: size.height / 2,
+        //    scale: 2,
+        //    rotation: 180
+        //});
+        //this.addChild(this.sprite, 0);
+
+        //this.sprite.runAction(
+        //    cc.sequence(
+        //        cc.rotateTo(2, 0),
+        //        cc.scaleTo(2, 1, 1)
+        //    )
+        //  );
         helloLabel.runAction(
             cc.spawn(
                 cc.moveBy(2.5, cc.p(0, size.height - 40)),
