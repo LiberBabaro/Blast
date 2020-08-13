@@ -16,7 +16,7 @@ var res = {
     font: {
         type: "font",
         name: "Marvin",
-        srcs: ["res/Marvin.ttf"]
+        srcs: ["res/fonts/Marvin.ttf"]
     }
 
 };
