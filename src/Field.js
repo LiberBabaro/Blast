@@ -22,7 +22,9 @@ var Field = cc.Node.extend({
         cc.log(this.MAP);
         var c = this.MAP[1][8];
         cc.log(c);
-        this.collapseTiles(1, 8, c);
+        if (this.isCollapasable(1, 8)) {
+            this.collapseTiles(1, 8, c);
+        }
     },
 
     removeTile: function( tileX, tileY ) {
@@ -54,6 +56,29 @@ var Field = cc.Node.extend({
                 this.collapseTiles(tileX, tileY + 1, color);
             }
         }
+    },
 
+    isCollapasable: function( tileX, tileY ) {
+        if (tileX > 0) {
+            if ( this.MAP[tileX - 1][tileY] === this.MAP[tileX][tileY] ) {
+                return true;
+            }
+        }
+        if ( tileX < this.HEIGHT - 1 ) {
+            if ( this.MAP[tileX + 1][tileY] === this.MAP[tileX][tileY] ) {
+                return true;
+            }
+        }
+        if ( tileY > 0 ) {
+            if ( this.MAP[tileX][tileY - 1] === this.MAP[tileX][tileY] ) {
+                return true;
+            }
+        }
+        if ( tileY < this.WIDTH - 1 ) {
+            if ( this.MAP[tileX][tileY + 1] === this.MAP[tileX][tileY] ) {
+                return true;
+            }
+        }
+        return false;
     }
 });
