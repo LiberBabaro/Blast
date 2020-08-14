@@ -52,6 +52,12 @@ var HelloWorldLayer = cc.Layer.extend({
         this.field.setPosition(cc.p( (132), (219)) );
         this.addChild( this.field );
 
+        //this.field.runAction(
+        //    cc.spawn(
+        //        cc.moveTo(2.5, cc.p(0, 0))
+        //    )
+        //);
+
         //this.sprite = new cc.Sprite(res.tile.red);
         //this.sprite.attr({
         //    x: size.width / 2,
