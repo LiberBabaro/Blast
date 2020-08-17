@@ -23,6 +23,7 @@ var Field = cc.Node.extend({
         }
         this.setAnchorPoint( cc.p( 0, 0 ) );
         cc.log(this.MAP);
+        //this.addChild(this.MAP);
         cc.log(this.COLORS_MAP);
         var c = this.COLORS_MAP[1][8];
         cc.log(c);
@@ -32,62 +33,63 @@ var Field = cc.Node.extend({
         }
     },
 
-    removeTile: function( tileX, tileY ) {
-        var r = tileX;
-        var c = tileY;
-        this.removeChild(this.MAP[tileX][tileY], true);
-        this.MAP[tileX][tileY] = null;
-        this.COLORS_MAP[tileX][tileY] = "";
-        cc.log(this.MAP[tileX][tileY]);
+    removeTile: function( row, col ) {
+        var r = row;
+        var c = col;
+        this.removeChild(this.MAP[row][col], true);
+        this.MAP[row][col] = null;
+        this.COLORS_MAP[row][col] = "";
+        cc.log(this.MAP[row][col]);
     },
 
-    collapseTiles: function( tileX, tileY, color ) {
-        this.removeTile(tileX, tileY);
-        if (tileX > 0) {
-            if ( this.COLORS_MAP[tileX - 1][tileY] === color ) {
-                this.collapseTiles(tileX - 1, tileY, color);
+    collapseTiles: function( row, col, color ) {
+        this.removeTile(row, col);
+        if (row > 0) {
+            if ( this.COLORS_MAP[row - 1][col] === color ) {
+                this.collapseTiles(row - 1, col, color);
             }
         }
-        if ( tileX < this.HEIGHT - 1 ) {
-            if ( this.COLORS_MAP[tileX + 1][tileY] === color ) {
-                this.collapseTiles(tileX + 1, tileY, color);
+        if ( row < this.HEIGHT - 1 ) {
+            if ( this.COLORS_MAP[row + 1][col] === color ) {
+                this.collapseTiles(row + 1, col, color);
             }
         }
-        if ( tileY > 0 ) {
-            if ( this.COLORS_MAP[tileX][tileY - 1] === color ) {
-                this.collapseTiles(tileX, tileY - 1, color);
+        if ( col > 0 ) {
+            if ( this.COLORS_MAP[row][col - 1] === color ) {
+                this.collapseTiles(row, col - 1, color);
             }
         }
-        if ( tileY < this.WIDTH - 1 ) {
-            if ( this.COLORS_MAP[tileX][tileY + 1] === color ) {
-                this.collapseTiles(tileX, tileY + 1, color);
+        if ( col < this.WIDTH - 1 ) {
+            if ( this.COLORS_MAP[row][col + 1] === color ) {
+                this.collapseTiles(row, col + 1, color);
             }
         }
     },
 
-    isCollapasable: function( tileX, tileY ) {
-        if (tileX > 0) {
-            if ( this.COLORS_MAP[tileX - 1][tileY] === this.COLORS_MAP[tileX][tileY] ) {
+    isCollapasable: function( row, col ) {
+        if (row > 0) {
+            if ( this.COLORS_MAP[row - 1][col] === this.COLORS_MAP[row][col] ) {
                 return true;
             }
         }
-        if ( tileX < this.HEIGHT - 1 ) {
-            if ( this.COLORS_MAP[tileX + 1][tileY] === this.COLORS_MAP[tileX][tileY] ) {
+        if ( row < this.HEIGHT - 1 ) {
+            if ( this.COLORS_MAP[row + 1][col] === this.COLORS_MAP[row][col] ) {
                 return true;
             }
         }
-        if ( tileY > 0 ) {
-            if ( this.COLORS_MAP[tileX][tileY - 1] === this.COLORS_MAP[tileX][tileY] ) {
+        if ( col > 0 ) {
+            if ( this.COLORS_MAP[row][col - 1] === this.COLORS_MAP[row][col] ) {
                 return true;
             }
         }
-        if ( tileY < this.WIDTH - 1 ) {
-            if ( this.COLORS_MAP[tileX][tileY + 1] === this.COLORS_MAP[tileX][tileY] ) {
+        if ( col < this.WIDTH - 1 ) {
+            if ( this.COLORS_MAP[row][col + 1] === this.COLORS_MAP[row][col] ) {
                 return true;
             }
         }
         return false;
     },
+
     addHandlers: function() {
         var self = this;
         cc.eventManager.addListener({
@@ -103,6 +105,7 @@ var Field = cc.Node.extend({
             }
         }, this);
     },
+
     onTouchBegan:function (touch, event) {
         cc.log(event);
         cc.log(touch);
@@ -114,16 +117,21 @@ var Field = cc.Node.extend({
         cc.log(ly);
         return true;
     },
+
     onTouchMoved:function (touch, event) {
     },
+
     onTouchEnded:function (touch, event) {
         cc.log(event);
         cc.log(touch);
+        return true;
     },
+
     onEnter:function () {
         //cc.registerTargetedDelegate(1, true, this);
         this._super();
     },
+
     onExit:function () {
         //cc.unregisterTouchDelegate(this);
         this._super();
