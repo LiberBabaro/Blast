@@ -28,9 +28,6 @@ var Field = cc.Node.extend({
         var c = this.COLORS_MAP[1][8];
         cc.log(c);
         this.addHandlers();
-        if (this.isCollapasable(1, 8)) {
-            this.collapseTiles(1, 8, c);
-        }
     },
 
     removeTile: function( row, col ) {
@@ -115,6 +112,22 @@ var Field = cc.Node.extend({
         var ly = getPoint.y -  this.getPositionY();
         cc.log(lx);
         cc.log(ly);
+        var col = Math.trunc((lx - 50) / 171);
+        var row = Math.trunc((ly - 50) / 170);
+        cc.log(row);
+        cc.log(col);
+        var c = this.COLORS_MAP[row][col];
+        if (row >= 0 && row < this.HEIGHT && col >= 0 && col < this.WIDTH && c) {
+            cc.log('+');
+            cc.log(c);
+            if (this.isCollapasable(row, col)) {
+                this.collapseTiles(row, col, c);
+            }
+            return true;
+        } else {
+            cc.log('-');
+            return false;
+        }
         return true;
     },
 
