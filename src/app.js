@@ -12,8 +12,8 @@ var HelloWorldLayer = cc.Layer.extend({
         // ask the window size
         var size = cc.winSize;
 
-        var backgroundLayer = new cc.LayerColor.create();
-        backgroundLayer.setColor(cc.color(161, 161, 161));
+        var backgroundLayer = new cc.LayerColor.create(new cc.color(161, 161, 161));
+        //backgroundLayer.setColor(cc.color(161, 161, 161));
         this.addChild(backgroundLayer);
         
         // add a "close" icon to exit the progress. it's an autorelease object

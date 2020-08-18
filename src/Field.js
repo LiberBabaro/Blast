@@ -90,20 +90,35 @@ var Field = cc.Node.extend({
     addHandlers: function() {
         var self = this;
         cc.eventManager.addListener({
-            event: cc.EventListener.TOUCH_ONE_BY_ONE,
-            onTouchBegan : function( touch, event ) {
-                self.onTouchBegan( touch, event );
+            event: cc.EventListener.MOUSE,
+            onMouseDown : function( touch, event ) {
+                self.onMouseDown( touch, event );
             },
-            onTouchMoved: function( touch, event ) {
-                self.onTouchMoved( touch, event );
+            onMouseMove: function( touch, event ) {
+                self.onMouseMove( touch, event );
             },
-            onTouchEnded: function( touch, event ) {
-                self.onTouchEnded( touch, event );
+            onMouseScroll: function( touch, event ) {
+                self.onMouseScroll( touch, event );
+            },
+            onMouseUp: function( touch, event ) {
+                self.onMouseUp( touch, event );
             }
         }, this);
     },
 
-    onTouchBegan:function (touch, event) {
+    onMouseDown:function (touch, event) {
+        cc.log(event);
+        cc.log(touch);
+
+        return true;
+    },
+
+    onMouseMove:function (touch, event) {
+    },
+    onMouseScroll:function (touch, event) {
+    },
+
+    onMouseUp:function (touch, event) {
         cc.log(event);
         cc.log(touch);
         var getPoint = touch.getLocation();
@@ -128,15 +143,6 @@ var Field = cc.Node.extend({
             cc.log('-');
             return false;
         }
-        return true;
-    },
-
-    onTouchMoved:function (touch, event) {
-    },
-
-    onTouchEnded:function (touch, event) {
-        cc.log(event);
-        cc.log(touch);
         return true;
     },
 
