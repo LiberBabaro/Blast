@@ -1,6 +1,6 @@
 var Field = cc.Node.extend({
-    WIDTH: 9,
-    HEIGHT: 10,
+    WIDTH: 3,
+    HEIGHT: 3,
     MAP: [[], [], [], [], [], [], [], [], [], []],
     COLORS_MAP: [[], [], [], [], [], [], [], [], [], []],
 
@@ -30,13 +30,28 @@ var Field = cc.Node.extend({
         this.addHandlers();
     },
 
+    renderTiles: function() {
+        for (var row = 0; row < this.HEIGHT; row++) {
+            for (var col = 0; col < this.WIDTH; col++) {
+                this.removeChild(this.MAP[row][col], true);
+                var s = new Tile(col * 171 / 2, (row) * 170 / 2, this.COLORS_MAP[row][col]);
+                this.MAP[row][col] = s;
+                this.COLORS_MAP[row][col] = s.tileColor;
+                //s = cc.Sprite.create(res.tile.blue);
+                s.setAnchorPoint( cc.p( 0, 0 ) );
+                s.setPosition( cc.p( col * 171 / 2 + 50, (row) * 170 / 2 + 50) );
+                s.setTag(row + ' ' + col);
+                this.addChild( s, row );
+            }
+        }
+    },
+
     removeTile: function( row, col ) {
         var r = row;
         var c = col;
         this.removeChild(this.MAP[row][col], true);
         this.MAP[row][col] = null;
         this.COLORS_MAP[row][col] = "";
-        cc.log(this.MAP[row][col]);
     },
 
     collapseTiles: function( row, col, color ) {
@@ -87,6 +102,39 @@ var Field = cc.Node.extend({
         return false;
     },
 
+    checkAvailableMoves: function() {
+        for (var col = 0; col < this.WIDTH; col++) {
+            for (var row = 0; row < this.HEIGHT - 1; row++) {
+                if (this.isCollapasable(row, col))
+                    return true;
+            }
+        }
+        return false;
+    },
+
+    moveDown: function () {
+        for (var col = 0; col < this.WIDTH; col++) {
+            //var child;
+            for (var row = 0; row < this.HEIGHT - 1; row++) {
+                if (this.COLORS_MAP[row][col] === "") {
+                    for (var rown = row + 1; rown < this.HEIGHT; rown++) {
+                        if (this.COLORS_MAP[rown][col] !== "") {
+                            var tmp = this.COLORS_MAP[rown][col]
+                            this.COLORS_MAP[rown][col] = this.COLORS_MAP[row][col];
+                            this.COLORS_MAP[row][col] = tmp;
+                            var tmp1 = this.MAP[rown][col]
+                            this.MAP[rown][col] = this.MAP[row][col];
+                            this.MAP[row][col] = tmp;
+                            this.MAP[row][col].shifted = rown;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        cc.log(this.COLORS_MAP);
+    },
+
     addHandlers: function() {
         var self = this;
         cc.eventManager.addListener({
@@ -115,6 +163,7 @@ var Field = cc.Node.extend({
 
     onMouseMove:function (touch, event) {
     },
+
     onMouseScroll:function (touch, event) {
     },
 
@@ -136,7 +185,10 @@ var Field = cc.Node.extend({
             cc.log('+');
             cc.log(c);
             if (this.isCollapasable(row, col)) {
+                cc.log(this.COLORS_MAP);
                 this.collapseTiles(row, col, c);
+                this.moveDown();
+                this.renderTiles();
             }
             return true;
         } else {
