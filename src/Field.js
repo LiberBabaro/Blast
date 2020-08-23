@@ -1,6 +1,6 @@
 var Field = cc.Node.extend({
-    WIDTH: 3,
-    HEIGHT: 3,
+    WIDTH: 9,
+    HEIGHT: 10,
     MAP: [[], [], [], [], [], [], [], [], [], []],
     COLORS_MAP: [[], [], [], [], [], [], [], [], [], []],
 
@@ -25,8 +25,6 @@ var Field = cc.Node.extend({
         cc.log(this.MAP);
         //this.addChild(this.MAP);
         cc.log(this.COLORS_MAP);
-        var c = this.COLORS_MAP[1][8];
-        cc.log(c);
         this.addHandlers();
     },
 
