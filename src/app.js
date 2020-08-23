@@ -58,6 +58,28 @@ var HelloWorldLayer = cc.Layer.extend({
         //    )
         //);
 
+        this.score = new cc.Sprite(res.ScoreBg);
+        this.score.attr({
+            x: 2197 - 29 + this.score.width / 2,
+            y: 922 - 45 + this.score.height / 2
+        });
+        this.addChild(this.score, 0);
+
+        this.top = new cc.Sprite(res.TopBg);
+        this.top.attr({
+            x: 310 - 5,
+            y: 2165 - 14
+        });
+        //this.top.setAnchorPoint( cc.p( - 623, - 314 ) );
+        this.progress = new cc.Sprite(res.progress.back);
+        this.top.setAnchorPoint( cc.p( 0, 0 ) );
+        this.progress.attr({
+            x: 625,
+            y: 65
+        });
+        this.progress.setAnchorPoint( cc.p( 0, 0 ) );
+        this.addChild(this.top, 2);
+        this.top.addChild(this.progress, 3);
         //this.sprite = new cc.Sprite(res.tile.red);
         //this.sprite.attr({
         //    x: size.width / 2,
