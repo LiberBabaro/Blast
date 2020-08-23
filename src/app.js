@@ -39,12 +39,7 @@ var HelloWorldLayer = cc.Layer.extend({
         // 3. add your codes below...
         // add a label shows "Hello World"
         // create and initialize a label
-        var helloLabel = new cc.LabelTTF("Hello World", "Marvin", 38);
-        // position the label on the center of the screen
-        helloLabel.x = size.width / 2;
-        helloLabel.y = 0;
-        // add the label as a child to this layer
-        this.addChild(helloLabel, 5);
+
 
         // add "HelloWorld" splash screen
         this.field = new Field();
@@ -78,8 +73,14 @@ var HelloWorldLayer = cc.Layer.extend({
             y: 65
         });
         this.progress.setAnchorPoint( cc.p( 0, 0 ) );
-        this.addChild(this.top, 2);
+        var progressLabel = new cc.LabelTTF("Прогресс", "Marvin", 64);
+        // position the label on the center of the screen
+        progressLabel.x = 507 + progressLabel.width / 2;
+        progressLabel.y = 170 + progressLabel.height / 2;
+        // add the label as a child to this layer
+        this.progress.addChild(progressLabel, 5);
         this.top.addChild(this.progress, 3);
+        this.addChild(this.top, 2);
         //this.sprite = new cc.Sprite(res.tile.red);
         //this.sprite.attr({
         //    x: size.width / 2,
@@ -95,12 +96,12 @@ var HelloWorldLayer = cc.Layer.extend({
         //        cc.scaleTo(2, 1, 1)
         //    )
         //  );
-        helloLabel.runAction(
-            cc.spawn(
-                cc.moveBy(2.5, cc.p(0, size.height - 40)),
-                cc.tintTo(2.5,255,125,0)
-            )
-        );
+        //helloLabel.runAction(
+        //    cc.spawn(
+        //        cc.moveBy(2.5, cc.p(0, size.height - 40)),
+        //        cc.tintTo(2.5,255,125,0)
+        //    )
+        //);
         return true;
     }
 });
