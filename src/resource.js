@@ -7,9 +7,10 @@ var res = {
     ScoreBg: "res/images/panel_score.png",
 
     button: {
-        btn1: "res/images/buttonBg_1",
-        btn2: "res/images/buttonBg_2",
-        pauseBtn: "res/images/buttonBg_2"
+        btn1: "res/images/buttonBg_1.png",
+        btn2: "res/images/buttonBg_2.png",
+        pause: "res/images/pause.png",
+        bonus: "res/images/bonusBtn.png"
     },
 
     progress: {
