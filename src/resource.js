@@ -4,6 +4,13 @@ var res = {
     CloseSelected_png : "res/CloseSelected.png",
 
     FieldBg: "res/images/FieldBg.png",
+    ScoreBg: "res/images/panel_score.png",
+
+    button: {
+        btn1: "res/images/buttonBg_1",
+        btn2: "res/images/buttonBg_2",
+        pauseBtn: "res/images/buttonBg_2"
+    },
 
     tile: {
         blue: "/res/images/tiles/BlueTile.png",
