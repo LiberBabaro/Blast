@@ -4,6 +4,7 @@ var res = {
     CloseSelected_png : "res/CloseSelected.png",
 
     FieldBg: "res/images/FieldBg.png",
+    TopBg: "res/images/topBg.png",
     ScoreBg: "res/images/panel_score.png",
 
     button: {
