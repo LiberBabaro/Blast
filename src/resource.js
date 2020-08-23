@@ -12,6 +12,11 @@ var res = {
         pauseBtn: "res/images/buttonBg_2"
     },
 
+    progress: {
+        back: "res/images/progressBg.png",
+        front: "res/images/progressBar.png"
+    },
+
     tile: {
         blue: "/res/images/tiles/BlueTile.png",
         purple: "/res/images/tiles/PurpleTile.png",
