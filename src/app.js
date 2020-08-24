@@ -108,7 +108,7 @@ var GameLayer = cc.Layer.extend({
     registerScoreCallback: function() {
         var gameLayer = this;
         this.field.setCollapseCallback(function( c ) {
-            gameLayer.scoreCount++;
+            gameLayer.scoreCount += c;
             gameLayer.movesCount--;
             gameLayer.updateScoreLabel();
         });
