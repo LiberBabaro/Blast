@@ -25,6 +25,7 @@ var res = {
         red: "/res/images/tiles/RedTile.png",
         yellow: "/res/images/tiles/YellowTile.png",
         green: "/res/images/tiles/GreenTile.png",
+        superb: "/res/images/tiles/SuperTile.png"
     },
 
     font: {
