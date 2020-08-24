@@ -49,15 +49,15 @@ var GameLayer = cc.Layer.extend({
         scoreLabel.y = 361;
         this.score.addChild(scoreLabel, 5);
 
-        var scoreCountLabel = new cc.LabelTTF("0", "Marvin", 132);
-        scoreCountLabel.x = this.score.width / 2;
-        scoreCountLabel.y = 235;
-        this.score.addChild(scoreCountLabel, 5);
+        this.scoreCountLabel = new cc.LabelTTF("0", "Marvin", 132);
+        this.scoreCountLabel.x = this.score.width / 2;
+        this.scoreCountLabel.y = 235;
+        this.score.addChild(this.scoreCountLabel, 5);
 
-        var movesCountLabel = new cc.LabelTTF("37", "Marvin", 230);
-        movesCountLabel.x = this.score.width / 2;
-        movesCountLabel.y = 712;
-        this.score.addChild(movesCountLabel, 5);
+        this.movesCountLabel = new cc.LabelTTF("37", "Marvin", 230);
+        this.movesCountLabel.x = this.score.width / 2;
+        this.movesCountLabel.y = 712;
+        this.score.addChild(this.movesCountLabel, 5);
 
         this.addChild(this.score, 0);
 
@@ -92,11 +92,14 @@ var GameLayer = cc.Layer.extend({
 
         this.top.addChild(this.progress, 3);
         this.addChild(this.top, 2);
+
+        this.registerScoreCallback();
         return true;
     },
 
     updateScoreLabel: function() {
-        this.scoreLabel.setString( this.score );
+        this.scoreCountLabel.setString( this.scoreCount );
+        this.movesCountLabel.setString( this.movesCount );
         if (this.scoreCount == 299){}
         if (this.movesCount == 0){}
             //cc.director.runScene(new GameOverScene(this.score));
@@ -104,7 +107,7 @@ var GameLayer = cc.Layer.extend({
 
     registerScoreCallback: function() {
         var gameLayer = this;
-        this.field.setEatCallback(function( coin ) {
+        this.field.setCollapseCallback(function( c ) {
             gameLayer.scoreCount++;
             gameLayer.movesCount--;
             gameLayer.updateScoreLabel();

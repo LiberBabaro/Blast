@@ -26,6 +26,7 @@ var Field = cc.Node.extend({
         //this.addChild(this.MAP);
         cc.log(this.COLORS_MAP);
         this.addHandlers();
+        this.collapseCallback = null;
     },
 
     renderTiles: function() {
@@ -133,6 +134,10 @@ var Field = cc.Node.extend({
         cc.log(this.COLORS_MAP);
     },
 
+    setCollapseCallback: function(callback) {
+        this.collapseCallback = callback;
+    },
+
     addHandlers: function() {
         var self = this;
         cc.eventManager.addListener({
@@ -184,6 +189,9 @@ var Field = cc.Node.extend({
             cc.log(c);
             if (this.isCollapasable(row, col)) {
                 cc.log(this.COLORS_MAP);
+                if ( this.collapseCallback ) {
+                    this.collapseCallback( c );
+                }
                 this.collapseTiles(row, col, c);
                 this.moveDown();
                 this.renderTiles();
