@@ -3,6 +3,7 @@ var Field = cc.Node.extend({
     HEIGHT: 10,
     MAP: [[], [], [], [], [], [], [], [], [], []],
     COLORS_MAP: [[], [], [], [], [], [], [], [], [], []],
+    collapseCounter: 0,
 
     ctor: function () {
         this._super();
@@ -33,6 +34,9 @@ var Field = cc.Node.extend({
         for (var row = 0; row < this.HEIGHT; row++) {
             for (var col = 0; col < this.WIDTH; col++) {
                 this.removeChild(this.MAP[row][col], true);
+                if(this.COLORS_MAP[row][col] === "") {
+                    this.collapseCounter++;
+                }
                 var s = new Tile(col * 171 / 2, (row) * 170 / 2, this.COLORS_MAP[row][col]);
                 this.MAP[row][col] = s;
                 this.COLORS_MAP[row][col] = s.tileColor;
@@ -134,6 +138,18 @@ var Field = cc.Node.extend({
         cc.log(this.COLORS_MAP);
     },
 
+    CreateSuperTile: function(row, col) {
+        this.removeChild(this.MAP[row][col], true);
+        var s = new SuperTile(col * 171 / 2, (row) * 170 / 2);
+        this.MAP[row][col] = s;
+        this.COLORS_MAP[row][col] = s.tileColor;
+        //s = cc.Sprite.create(res.tile.blue);
+        s.setAnchorPoint( cc.p( 0, 0 ) );
+        s.setPosition( cc.p( col * 171 / 2 + 50, (row) * 170 / 2 + 50) );
+        s.setTag(row + ' ' + col);
+        this.addChild( s, row );
+    },
+
     setCollapseCallback: function(callback) {
         this.collapseCallback = callback;
     },
@@ -189,12 +205,16 @@ var Field = cc.Node.extend({
             cc.log(c);
             if (this.isCollapasable(row, col)) {
                 cc.log(this.COLORS_MAP);
-                if ( this.collapseCallback ) {
-                    this.collapseCallback( c );
-                }
                 this.collapseTiles(row, col, c);
                 this.moveDown();
                 this.renderTiles();
+                if (this.collapseCounter >= 5) {
+                    this.CreateSuperTile(row, col);
+                }
+                if ( this.collapseCallback ) {
+                    this.collapseCallback( this.collapseCounter );
+                }
+                this.collapseCounter = 0;
             }
             return true;
         } else {
