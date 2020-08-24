@@ -100,9 +100,10 @@ var GameLayer = cc.Layer.extend({
     updateScoreLabel: function() {
         this.scoreCountLabel.setString( this.scoreCount );
         this.movesCountLabel.setString( this.movesCount );
-        if (this.scoreCount == 299){}
-        if (this.movesCount == 0){}
-            //cc.director.runScene(new GameOverScene(this.score));
+        if (this.scoreCount >= 100)
+            cc.director.runScene(new GameVictoryScene(this.scoreCount));
+        if (this.movesCount === 0)
+            cc.director.runScene(new GameOverScene(this.scoreCount));
     },
 
     registerScoreCallback: function() {

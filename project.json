@@ -15,6 +15,9 @@
         "src/app.js",
         "src/Tile.js",
         "src/Field.js",
-        "src/SuperTile.js"
+        "src/SuperTile.js",
+        "src/StartScene.js",
+        "src/GameVictoryScene.js",
+        "src/GameOverScene.js"
     ]
 }
