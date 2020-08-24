@@ -90,6 +90,14 @@ var GameLayer = cc.Layer.extend({
         progressLabel.y = 170 + progressLabel.height / 2;
         this.progress.addChild(progressLabel, 5);
 
+        var progressBar = new cc.Sprite(res.progress.front);
+        progressBar.attr({
+            x: 625 + 52,
+            y: 65 + 44
+        });
+        progressBar.setContentSize(0.5, progressBar.height);
+        this.progress.addChild(progressBar, 5);
+
         this.top.addChild(this.progress, 3);
         this.addChild(this.top, 2);
 
