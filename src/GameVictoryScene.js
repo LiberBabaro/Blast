@@ -3,9 +3,10 @@ var GameVictoryScene = cc.Scene.extend({
     labelGameOver: {},
     labelScore: {},
     labelPrompt: {},
-    ctor: function(score) {
+    ctor: function(score, moves) {
         this._super();
-        this.finalScore = score;
+        this.moves = moves;
+        this.finalScore = score + moves * 5;
         cc.eventManager.addListener({
             event: cc.EventListener.TOUCH_ONE_BY_ONE,
             onTouchBegan: function(touch, event) {
@@ -29,9 +30,14 @@ var GameVictoryScene = cc.Scene.extend({
         this.labelScore.y = winSize.height * 0.43;
         this.addChild(this.labelScore);
 
+        this.labelScore = new cc.LabelTTF("Оставалось ходов: " + this.moves, "Marvin", 110);
+        this.labelScore.x = winSize.width * 0.50;
+        this.labelScore.y = winSize.height * 0.30;
+        this.addChild(this.labelScore);
+
         this.labelPrompt = new cc.LabelTTF("Нажмите в любом месте для продолжения",  "Marvin", 70);
         this.labelPrompt.x = winSize.width * 0.50;
-        this.labelPrompt.y = winSize.height * 0.30;
+        this.labelPrompt.y = winSize.height * 0.20;
         this.addChild(this.labelPrompt);
     },
 });

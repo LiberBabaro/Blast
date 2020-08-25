@@ -109,7 +109,7 @@ var GameLayer = cc.Layer.extend({
         this.scoreCountLabel.setString( this.scoreCount );
         this.movesCountLabel.setString( this.movesCount );
         if (this.scoreCount >= 100)
-            cc.director.runScene(new GameVictoryScene(this.scoreCount));
+            cc.director.runScene(new GameVictoryScene(this.scoreCount, this.movesCount));
         if (this.movesCount === 0)
             cc.director.runScene(new GameOverScene(this.scoreCount));
     },
