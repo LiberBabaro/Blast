@@ -150,6 +150,12 @@ var Field = cc.Node.extend({
         this.addChild( s, row );
     },
 
+    superTileCollapse: function (row, col) {
+        for (var c = 0; c < this.WIDTH; c++) {
+            this.removeTile(row, c);
+        }
+    },
+
     setCollapseCallback: function(callback) {
         this.collapseCallback = callback;
     },
@@ -203,12 +209,25 @@ var Field = cc.Node.extend({
         if (row >= 0 && row < this.HEIGHT && col >= 0 && col < this.WIDTH && c) {
             cc.log('+');
             cc.log(c);
-            if (this.isCollapasable(row, col)) {
-                cc.log(this.COLORS_MAP);
-                this.collapseTiles(row, col, c);
+            if (c === "superb") {
+                this.superTileCollapse(row, col);
                 this.moveDown();
                 this.renderTiles();
-                if (this.collapseCounter >= 5) {
+                if ( this.collapseCallback ) {
+                    this.collapseCallback( this.collapseCounter );
+                }
+                this.collapseCounter = 0;
+            }
+            else if (this.isCollapasable(row, col)) {
+                cc.log(this.COLORS_MAP);
+                if (c === "superb") {
+                    this.superTileCollapse(row, col);
+                } else {
+                    this.collapseTiles(row, col, c);
+                }
+                this.moveDown();
+                this.renderTiles();
+                if (this.collapseCounter >= 5 && c !== "superb") {
                     this.CreateSuperTile(row, col);
                 }
                 if ( this.collapseCallback ) {

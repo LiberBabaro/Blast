@@ -95,7 +95,7 @@ var GameLayer = cc.Layer.extend({
             x: 625 + 52,
             y: 65 + 44
         });
-        progressBar.setContentSize(0.5, progressBar.height);
+        progressBar.setContentSize(10, progressBar.height);
         this.progress.addChild(progressBar, 5);
 
         this.top.addChild(this.progress, 3);
