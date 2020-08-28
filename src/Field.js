@@ -52,9 +52,13 @@ var Field = cc.Node.extend({
     removeTile: function( row, col ) {
         var r = row;
         var c = col;
-        this.removeChild(this.MAP[row][col], true);
-        this.MAP[row][col] = null;
-        this.COLORS_MAP[row][col] = "";
+        var act = new cc.FadeOut(1);
+        this.MAP[row][col].runAction(act);
+        //setTimeout(function () {
+            this.removeChild(this.MAP[row][col], true);
+            this.MAP[row][col] = null;
+            this.COLORS_MAP[row][col] = "";
+        //}, 1000);
     },
 
     collapseTiles: function( row, col, color ) {
