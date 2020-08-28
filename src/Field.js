@@ -4,6 +4,7 @@ var Field = cc.Node.extend({
     MAP: [[], [], [], [], [], [], [], [], [], []],
     COLORS_MAP: [[], [], [], [], [], [], [], [], [], []],
     collapseCounter: 0,
+    mixCount: 1,
 
     ctor: function () {
         this._super();
@@ -238,6 +239,15 @@ var Field = cc.Node.extend({
                     this.collapseCallback( this.collapseCounter );
                 }
                 this.collapseCounter = 0;
+                if (this.checkAvailableMoves()) {
+                }
+                else if (this.mixCount > 0) {
+                    this.COLORS_MAP = [[], [], [], [], [], [], [], [], [], []];
+                    this.renderTiles();
+                    this.mixCount--;
+                } else {
+                    cc.director.runScene(new GameOverScene(this.scoreCount));
+                }
             }
             return true;
         } else {
